@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Alert, Button } from 'react-native';
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
@@ -21,8 +21,23 @@ const GameScreen = props => {
         generateRandomBetween(1, 100, props.userChoice)
     );
 
+    //number of rounds is 0 initially
+    const [rounds, setRounds] = useState(0);
     const currentLow = useRef(1);
     const currentHigh = useRef(100);
+
+    //to destructure props (array destructuring) storing them in constants
+    //gets rid of having to type in "props.children" name
+    const { userChoice, onGameOver } = props;
+
+    //takes effect after render - to use for gameOver
+    useEffect(() => {
+        //if correct guess
+        if(currentGuess === userChoice) {
+            onGameOver(rounds);
+        }
+        //specify any value that's coming from outside of this effect function
+    }, [currentGuess, userChoice, onGameOver]);
 
     const nextGuessHandler = direction => {
         if((direction === 'lower' && currentGuess < props.userChoice) || (direction === 'greater' && currentGuess > props.userChoice)) {
@@ -41,6 +56,7 @@ const GameScreen = props => {
 
         const nextNumber = generateRandomBetween(currentLow.current, currentHigh.current, currentGuess);
         setCurrentGuess(nextNumber);
+        setRounds(curRounds => curRounds + 1);
     };
     
 
