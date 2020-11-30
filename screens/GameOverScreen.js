@@ -1,13 +1,29 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, Image } from 'react-native';
+import BodyText from '../components/BodyText';
+import TitleText from '../components/TitleText';
+
 
 const GameOverScreen = props => {
     return (
         <View style={styles.screen}>
-            <Text>Game Over</Text>
-            <Text>Number of rounds: {props.roundsNumber}</Text>
-            <Text>Number was: {props.userNumber}</Text>
-            <Button title="NEW GAME" onPress={props.onRestart}/>
+            <TitleText>Game Over</TitleText>
+            <View style={styles.imageContainer}>
+                <Image
+                fadeDuration={1000}
+                    // source={require('../assets/success.png')}
+                    source={{uri: 'https://image.shutterstock.com/image-photo/evening-view-ama-dablam-on-260nw-258841592.jpg'}}
+                    style={styles.image}
+                    resizeMode='cover'
+                />
+            </View>
+            <BodyText>
+                Your phone needed 
+                 <Text> {props.roundsNumber} </Text>
+                 rounds to guess the number 
+                 <Text> {props.userNumber} </Text>
+                 </BodyText>
+            <Button title="NEW GAME" onPress={props.onRestart} />
         </View>
     );
 };
@@ -17,6 +33,19 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    imageContainer: {
+        width: 300,
+        height: 300,
+        borderRadius: 150,
+        borderWidth: 3,
+        borderColor: 'black',
+        overflow: 'hidden',
+        margin: 30
+    },
+    image: {
+        width: '110%',
+        height: '110%',
     }
 });
 

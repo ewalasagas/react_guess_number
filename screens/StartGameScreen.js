@@ -9,6 +9,8 @@ import {
     Alert
 } from 'react-native';
 import Card from '../components/Card';
+import BodyText from '../components/BodyText';
+import TitleText from '../components/TitleText';
 import Colors from '../constants/colors';
 import Input from '../components/Input';
 import NumberContainer from '../components/NumberContainer';
@@ -30,7 +32,7 @@ const StartGameScreen = props => {
 
     const confirmInputHandler = () => {
         const chosenNumber = parseInt(enteredValue);
-        if ( isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
+        if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
             Alert.alert(
                 'Invalid number!',
                 'Number has to be a number between 1 and 99',
@@ -48,13 +50,14 @@ const StartGameScreen = props => {
     let confirmedOutput;
 
     if (confirmed) {
-        confirmedOutput = 
-        <Card style={styles.summaryContainer}>
-            <Text>You selected</Text>
-            <NumberContainer>{selectedNumber}</NumberContainer>
-            <Button title="START GAME" onPress={() => props.onStartGame(selectedNumber)}/>
-        </Card>
-        
+        confirmedOutput = (
+            <Card style={styles.summaryContainer}>
+                <BodyText>You selected</BodyText>
+                <NumberContainer>{selectedNumber}</NumberContainer>
+                <Button title="START GAME" onPress={() => props.onStartGame(selectedNumber)}
+                />
+            </Card>
+        );
     }
 
     return (
@@ -62,9 +65,9 @@ const StartGameScreen = props => {
             Keyboard.dismiss();
         }}>
             <View style={styles.screen}>
-                <Text style={styles.title}>Start a New Game!</Text>
+                <TitleText style={styles.title}>Start a New Game!</TitleText>
                 <Card style={styles.inputContainer}>
-                    <Text>Select a number</Text>
+                    <BodyText>Select a number</BodyText>
                     <Input
                         style={styles.input}
                         blurOnSubmit
@@ -106,6 +109,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         marginVertical: 10,
+        fontFamily: 'open-sans-bold',
     },
     inputContainer: {
         width: 300,
@@ -128,6 +132,9 @@ const styles = StyleSheet.create({
     summaryContainer: {
         marginTop: 20,
         alignItems: 'center',
+    },
+    text: {
+        fontFamily: 'open-sans'
     }
 });
 
