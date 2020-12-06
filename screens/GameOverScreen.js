@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button, Image } from 'react-native';
+// import { Colors } from 'react-native/Libraries/NewAppScreen';
 import BodyText from '../components/BodyText';
 import TitleText from '../components/TitleText';
+import Colors from '../constants/colors';
+import MainButton from '../components/MainButton';
 
 
 const GameOverScreen = props => {
@@ -10,20 +13,24 @@ const GameOverScreen = props => {
             <TitleText>Game Over</TitleText>
             <View style={styles.imageContainer}>
                 <Image
-                fadeDuration={1000}
+                    fadeDuration={1000}
                     // source={require('../assets/success.png')}
-                    source={{uri: 'https://image.shutterstock.com/image-photo/evening-view-ama-dablam-on-260nw-258841592.jpg'}}
+                    source={{ uri: 'https://image.shutterstock.com/image-photo/evening-view-ama-dablam-on-260nw-258841592.jpg' }}
                     style={styles.image}
                     resizeMode='cover'
                 />
             </View>
-            <BodyText>
-                Your phone needed 
-                 <Text> {props.roundsNumber} </Text>
-                 rounds to guess the number 
-                 <Text> {props.userNumber} </Text>
-                 </BodyText>
-            <Button title="NEW GAME" onPress={props.onRestart} />
+
+            <View styles={styles.resultContainer}>
+                <BodyText style={styles.resultText}>
+                    Your phone needed
+                 <Text styles={styles.highlight}> {props.roundsNumber} </Text>
+                    rounds to guess the number
+                 <Text style={styles.highlight}> {props.userNumber} </Text>
+                </BodyText>
+            </View>
+            <MainButton
+                onPress={props.onRestart}>NEW GAME</MainButton>
         </View>
     );
 };
@@ -46,6 +53,18 @@ const styles = StyleSheet.create({
     image: {
         width: '110%',
         height: '110%',
+    },
+    highlight: {
+        color: Colors.primary,
+        fontFamily: 'open-sans-bold',
+    },
+    resultContainer: {
+        marginHorizontal: 30,
+        marginVertical: 15
+    },
+    resultText: {
+        textAlign: 'center',
+        fontSize: 20
     }
 });
 

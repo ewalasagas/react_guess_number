@@ -11,6 +11,7 @@ import {
 import Card from '../components/Card';
 import BodyText from '../components/BodyText';
 import TitleText from '../components/TitleText';
+import MainButton from '../components/MainButton';
 import Colors from '../constants/colors';
 import Input from '../components/Input';
 import NumberContainer from '../components/NumberContainer';
@@ -54,8 +55,9 @@ const StartGameScreen = props => {
             <Card style={styles.summaryContainer}>
                 <BodyText>You selected</BodyText>
                 <NumberContainer>{selectedNumber}</NumberContainer>
-                <Button title="START GAME" onPress={() => props.onStartGame(selectedNumber)}
-                />
+                <MainButton
+                    onPress={() => props.onStartGame(selectedNumber)}
+                >START GAME</MainButton>
             </Card>
         );
     }
@@ -80,17 +82,17 @@ const StartGameScreen = props => {
                     />
                     <View style={styles.buttonContainer}>
                         {/* to have buttons the same size - wrap in view container */}
-                        <View style={styles.button}>
+                        <View style={styles.buttonReset}>
                             <Button
                                 title="Reset"
                                 onPress={resetInputHandler}
-                                color={Colors.accent} />
+                                color={'white'} />
                         </View>
-                        <View style={styles.button}>
+                        <View style={styles.buttonConfirm}>
                             <Button
                                 title="Confirm"
                                 onPress={confirmInputHandler}
-                                color={Colors.primary} />
+                                color={'white'} />
                         </View>
                     </View>
                 </Card>
@@ -122,8 +124,19 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingHorizontal: 15
     },
-    button: {
+    buttonReset: {
         width: 100,
+        borderWidth: 1,
+        borderColor: Colors.primary,
+        backgroundColor: Colors.accent,
+        borderRadius: 50,
+    },
+    buttonConfirm: {
+        width: 100,
+        borderWidth: 1,
+        borderColor: Colors.accent,
+        backgroundColor: Colors.primary,
+        borderRadius: 50,
     },
     input: {
         width: 50,
